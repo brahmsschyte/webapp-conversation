@@ -23,6 +23,16 @@ import { API_KEY, APP_ID, APP_INFO, isShowPrompt, promptTemplate } from '@/confi
 import type { Annotation as AnnotationType } from '@/types/log'
 import { addFileInfos, sortAgentSorts } from '@/utils/tools'
 
+import { signOut } from "next-auth/react";
+import Image from "next/image";
+interface UserInfoProps {
+  user: {
+    name?: string | null;
+    email?: string | null;
+    image?: string | null;
+  };
+}
+
 const Main: FC = () => {
   const { t } = useTranslation()
   const media = useBreakpoints()
@@ -611,6 +621,12 @@ const Main: FC = () => {
 
   return (
     <div className='bg-gray-100'>
+      <button
+        onClick={() => signOut()}
+        className="float-right focus:outline-none text-white bg-red-600 hover:bg-red-700 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2"
+      >
+        <span className="text-sm">Sign Out</span>
+      </button>
       <Header
         title={APP_INFO.title}
         isMobile={isMobile}
